@@ -6,6 +6,9 @@ const uuid = require("uuid");
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.createUser = (event, context, callback) => {
+  // createUser is called by lambda function...
+    // its not router.get('/createUser')
+    // serverless.yml ---> functions ---> createUser ---> handler: routes/users.createUser
   const data = JSON.parse(event.body);
 
   const params = {
