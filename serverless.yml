@@ -4,11 +4,12 @@
 
 service: RestApi23    # service name will be RestApi23
 
-frameworkVersion: "2"
+frameworkVersion: "3"
 
 provider:
   name: aws
   runtime: nodejs12.x
+  profile: dynamoLocal23
   environment:
     DYNAMODB_TABLE: ${self:service}Table    # dynamo table name ------> RestApi23Table
   iamRoleStatements:
@@ -20,8 +21,15 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+      # Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+      Resource: "*"
         # resource name -----> arn:aws:dynamodb:
+
+custom:
+  serverless-offline:
+    httpPort: 4000
+    websocketPort: 4001
+    lambdaPort: 4002
 
 functions:                  # 5 functions ------------> meaning 5 lambdas will be created
   createUser: # lambda functionName
@@ -64,6 +72,9 @@ functions:                  # 5 functions ------------> meaning 5 lambdas will b
           path: user
           method: get
           cors: true
+
+  hello33:
+    handler: handler.hello23
 
 resources:
   Resources:

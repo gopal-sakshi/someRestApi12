@@ -4,12 +4,17 @@
   "description": "<!-- title: 'AWS NodeJS Example' description: 'This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework.' layout: Doc framework: v2 platform: AWS language: nodeJS priority: 1 authorLink: 'https://github.com/serverless' authorName: 'Serverless, inc.' authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4' -->",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "createTable": "aws dynamodb create-table --cli-input-json file://resources/table23.json --endpoint-url http://localhost:8002 --profile dynamoLocal23",
+    "startDynamo": "java -D'java.library.path'=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb --port 8002",
+    "start": "npx serverless invoke local --function hello33",
+    "createUser": "npx serverless invoke local --function createUser --path resources/createUser23.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "serverless-offline": "^12.0.4",
+    "serverless-stage-manager": "^1.0.5"
   }
 }

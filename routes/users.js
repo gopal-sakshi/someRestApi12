@@ -1,15 +1,25 @@
 "use strict";
 
 const AWS = require("aws-sdk");
+AWS.config.update({
+  region: "us-east-2",
+  accessKeyId: 'chanti_gadu_local',                            // this doesnt have to be real Values
+  secretAccessKey: 'idiot_movie',
+  endpoint: "http://localhost:8002"               // make sure that dynamo service is running locally
+});
 const uuid = require("uuid");
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
+const dynamoDb = new AWS.DynamoDB();
+const docClient = new AWS.DynamoDB.DocumentClient();
 
 module.exports.createUser = (event, context, callback) => {
   // createUser is called by lambda function...
     // its not router.get('/createUser')
     // serverless.yml ---> functions ---> createUser ---> handler: routes/users.createUser
-  const data = JSON.parse(event.body);
+
+  console.log('event ===>', event);
+  // const data = JSON.parse(event);
+  const data = event;
 
   const params = {
     TableName: process.env.DYNAMODB_TABLE,
@@ -22,8 +32,14 @@ module.exports.createUser = (event, context, callback) => {
       updatedAt: new Date().getTime()
     }
   };
+  console.log('table23 ===> ', params.TableName);
 
-  dynamoDb.put(params, error => {
+  // dynamoDb.listTables({}, (err, data) => {
+  //   if(err) return null
+  //   if(data) {console.log(data); return data}
+  // });
+
+  docClient.put(params, error => {
     if (error) {
       console.error(error);
 
@@ -60,7 +76,7 @@ module.exports.updateUser = (event, context, callback) => {
     ReturnValues: "ALL_NEW"
   };
 
-  dynamoDb.update(params, (error, result) => {
+  docClient.update(params, (error, result) => {
     if (error) {
       console.error(error);
 
@@ -85,7 +101,7 @@ module.exports.deleteUser = (event, context, callback) => {
     }
   };
 
-  dynamoDb.delete(params, error => {
+  docClient.delete(params, error => {
     if (error) {
       console.error(error);
 
@@ -110,7 +126,7 @@ module.exports.getUser = (event, context, callback) => {
     }
   };
 
-  dynamoDb.get(params, (error, result) => {
+  docClient.get(params, (error, result) => {
     if (error) {
       console.error(error);
 
@@ -132,7 +148,7 @@ module.exports.getUsers = (event, context, callback) => {
     TableName: process.env.DYNAMODB_TABLE
   };
 
-  dynamoDb.scan(params, (error, result) => {
+  docClient.scan(params, (error, result) => {
     if (error) {
       console.error(error);
 
