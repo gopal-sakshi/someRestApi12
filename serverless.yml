@@ -26,6 +26,7 @@ provider:
         # resource name -----> arn:aws:dynamodb:
 
 custom:
+  stage: ${opt:stage, self:provider.stage}
   serverless-offline:
     httpPort: 4000
     websocketPort: 4001
@@ -77,18 +78,8 @@ functions:                  # 5 functions ------------> meaning 5 lambdas will b
     handler: handler.hello23
 
 resources:
-  Resources:
-    TodosDynamoDbTable:
-      Type: "AWS::DynamoDB::Table"
-      DeletionPolicy: Retain
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        ProvisionedThroughput:
-          ReadCapacityUnits: 1
-          WriteCapacityUnits: 1
-        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+  Resources: ${file(user.yml)}
+
+package:
+  exclude:
+    node_modules/serverless-offline

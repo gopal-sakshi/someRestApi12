@@ -1,0 +1,8 @@
+dev:
+  APP_SECRET: xx
+  APP_KEY: sss
+  DB_PREFIX: dev23
+prod:
+  APP_SECRET: xx
+  APP_KEY: sss
+  DB_PREFIX: prod23
