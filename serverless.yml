@@ -24,6 +24,7 @@ provider:
       # Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
       Resource: "*"
         # resource name -----> arn:aws:dynamodb:
+  stage: dev
 
 custom:
   stage: ${opt:stage, self:provider.stage}
@@ -31,6 +32,7 @@ custom:
     httpPort: 4000
     websocketPort: 4001
     lambdaPort: 4002
+  DB_PREFIX: dev23
 
 functions:                  # 5 functions ------------> meaning 5 lambdas will be created
   createUser: # lambda functionName
