@@ -13,14 +13,10 @@ const dynamoDb = new AWS.DynamoDB();
 const docClient = new AWS.DynamoDB.DocumentClient();
 
 module.exports.createUser = (event, context, callback) => {
-  // createUser is called by lambda function...
-    // its not router.get('/createUser')
-    // serverless.yml ---> functions ---> createUser ---> handler: routes/users.createUser
-
-  console.log('event ===>', event);
-  // const data = JSON.parse(event);
-  const data = event;
-
+  let data;
+  console.log('event ===> ', event);
+  event?.data ? data = event?.data : event;
+  console.log('data ===> ', data);
   const params = {
     TableName: process.env.DYNAMODB_TABLE,
     Item: {
@@ -42,17 +38,10 @@ module.exports.createUser = (event, context, callback) => {
   docClient.put(params, error => {
     if (error) {
       console.error(error);
-
-      callback(null, {
-        statusCode: error.statusCode || 501
-      });
+      callback(null, { statusCode: error.statusCode || 501 });
       return;
     }
-
-    callback(null, {
-      statusCode: 200,
-      body: JSON.stringify(params.Item)
-    });
+    callback(null, { statusCode: 200, body: JSON.stringify(params.Item) });
   });
 };
 
@@ -121,25 +110,16 @@ module.exports.deleteUser = (event, context, callback) => {
 module.exports.getUser = (event, context, callback) => {
   const params = {
     TableName: process.env.DYNAMODB_TABLE,
-    Key: {
-      id: event.pathParameters.id
-    }
+    Key: { email: event.email }
   };
 
   docClient.get(params, (error, result) => {
     if (error) {
       console.error(error);
-
-      callback(null, {
-        statusCode: error.statusCode || 501
-      });
+      callback(null, { statusCode: error.statusCode || 501 });
       return;
     }
-
-    callback(null, {
-      statusCode: 200,
-      body: JSON.stringify(result.Item)
-    });
+    callback(null, { statusCode: 200, body: JSON.stringify(result.Item) });
   });
 };
 

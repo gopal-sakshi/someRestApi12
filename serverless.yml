@@ -29,10 +29,13 @@ provider:
 custom:
   stage: ${opt:stage, self:provider.stage}
   serverless-offline:
-    httpPort: 4000
-    websocketPort: 4001
-    lambdaPort: 4002
+    httpPort: 4008
+    websocketPort: 4009
+    lambdaPort: 4010
   DB_PREFIX: dev23
+
+plugins:
+  - serverless-offline
 
 functions:                  # 5 functions ------------> meaning 5 lambdas will be created
   createUser: # lambda functionName
