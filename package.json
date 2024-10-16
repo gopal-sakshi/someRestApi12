@@ -1,25 +1,24 @@
 {
-  "name": "some-rest-api12",
-  "version": "1.0.0",
-  "description": "<!-- title: 'AWS NodeJS Example' description: 'This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework.' layout: Doc framework: v2 platform: AWS language: nodeJS priority: 1 authorLink: 'https://github.com/serverless' authorName: 'Serverless, inc.' authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4' -->",
-  "main": "handler.js",
-  "scripts": {
-    "createTable": "aws dynamodb create-table --cli-input-json file://resources/createTable.json --endpoint-url http://localhost:8002 --profile dynamoLocal23",
-    "startDynamo": "java -D'java.library.path'=./DynamoDBLocal_lib -jar DynamoDBLocal.jar -sharedDb --port 8002",
-    "invoke_local": "npx serverless invoke local --function hello33",
-    "start": "npx serverless offline",
-    "createUser1": "npx serverless invoke local --function createUser --path resources/createUser23.json",
-    "createUser3": "npx serverless invoke local --function createUser --raw --data \"{\"email\": \"test14@gmail.com\", \"firstName\": \"fname14\", \"lastName\": \"lname14\"}\"",
-    "createUser4": "npx serverless invoke local --function createUser --raw --data '{\"email\": \"test14@gmail.com\", \"firstName\": \"fname14\", \"lastName\": \"lname14\"}' ",
-    "getUser": "npx serverless invoke local --function getUser --path resources/getUser.json "
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "aws-sdk": "^2.1313.0",
-    "serverless-offline": "^12.0.4",
-    "serverless-stage-manager": "^1.0.5",
-    "uuid": "^8.3.2"
-  }
+    "name": "some-rest-api12",
+    "version": "1.0.0",
+    "description": "serverless23_learning",
+    "main": "handler.js",
+    "scripts": {
+        "createTable": "aws dynamodb create-table --cli-input-json file://resources/createTable.json --endpoint-url http://localhost:8002 --profile dynamoLocal23",
+        "invoke_local": "npx serverless invoke local --function hello33",
+        "start": "npx serverless offline",
+        "createUser1": "npx serverless invoke local --function createUser --path resources/createUser23.json",
+        "createUser3": "npx serverless invoke local --function createUser --raw --data \"{\"email\": \"test14@gmail.com\", \"firstName\": \"fname14\", \"lastName\": \"lname14\"}\"",
+        "createUser4": "npx serverless invoke local --function createUser --raw --data '{\"email\": \"test14@gmail.com\", \"firstName\": \"fname14\", \"lastName\": \"lname14\"}' ",
+        "getUser": "npx serverless invoke local --function getUser --path resources/getUser.json "
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "aws-sdk": "^2.1313.0",
+        "serverless-offline": "^12.0.4",
+        "serverless-stage-manager": "^1.0.5",
+        "uuid": "^8.3.2"
+    }
 }
