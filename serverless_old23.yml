@@ -1,11 +1,16 @@
-service: RestApi23
+# If you see the route handlers 
+  # you can also see that this table name is exposed as an environment variable that is consumed by our DynamoDB client
+
+
+service: RestApi23    # service name will be RestApi23
+
 frameworkVersion: "2"
 
 provider:
   name: aws
   runtime: nodejs18.x
   environment:
-    DYNAMODB_TABLE: ${self:service}Table23
+    DYNAMODB_TABLE: ${self:service}Table    # dynamo table name ------> RestApi23Table
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -16,18 +21,19 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:${opt:region, self:provider.region}:*:table/${self:provider.environment.DYNAMODB_TABLE}"
+        # resource name -----> arn:aws:dynamodb:
 
-functions:
-
-  createUser23:
-    handler: routes/users.createUser
+functions:                  # 5 functions ------------> meaning 5 lambdas will be created
+  createUser: # lambda functionName
+    handler: routes/users.createUser # this code will be triggered, when the below event happens
+    # events are the things that trigger your functions to run.
     events:
       - http:
           path: user
           method: post
           cors: true
 
-  updateUser23:
+  updateUser:
     handler: routes/users.updateUser
     events:
       - http:
@@ -35,7 +41,7 @@ functions:
           method: put
           cors: true
 
-  deleteUser23:
+  deleteUser:
     handler: routes/users.deleteUser
     events:
       - http:
@@ -43,7 +49,7 @@ functions:
           method: delete
           cors: true
 
-  getUser23:
+  getUser:
     handler: routes/users.getUser
     events:
       - http:
@@ -51,7 +57,7 @@ functions:
           method: get
           cors: true
 
-  getUsers23:
+  getUsers:
     handler: routes/users.getUsers
     events:
       - http:

@@ -1,0 +1,45 @@
+Serverless: Packaging service...
+Serverless: Excluding development dependencies...
+Serverless: Ensuring that deployment bucket exists
+Serverless: Uploading CloudFormation file to S3...
+Serverless: Uploading artifacts...
+Serverless: Uploading service RestApi23.zip file to S3 (60.92 MB)...
+Serverless: Validating template...
+Serverless: Updating Stack...
+Serverless: Checking Stack update progress...
+......................................................................................................
+Serverless: Stack update finished...
+Service Information
+service: RestApi23
+stage: dev
+region: us-east-1
+stack: RestApi23-dev
+resources: 35
+api keys:
+  None
+endpoints:
+  POST - https://bo8w6hifed.execute-api.us-east-1.amazonaws.com/dev/user
+  PUT - https://bo8w6hifed.execute-api.us-east-1.amazonaws.com/dev/user/{id}
+  DELETE - https://bo8w6hifed.execute-api.us-east-1.amazonaws.com/dev/user/{id}
+  GET - https://bo8w6hifed.execute-api.us-east-1.amazonaws.com/dev/user/{id}
+  GET - https://bo8w6hifed.execute-api.us-east-1.amazonaws.com/dev/user
+functions:
+  createUser23: RestApi23-dev-createUser23
+  updateUser23: RestApi23-dev-updateUser23
+  deleteUser23: RestApi23-dev-deleteUser23
+  getUser23: RestApi23-dev-getUser23
+  getUsers23: RestApi23-dev-getUsers23
+layers:
+  None
+Serverless: Deprecation warnings:
+
+Variables resolver reports following resolution errors:
+  - Cannot resolve variable at "provider.iamRoleStatements.0.Resource": Value not found at "self" source
+From a next major this will be communicated with a thrown error.
+Set "variablesResolutionMode: 20210326" in your service config, to adapt to new behavior now
+More Info: https://www.serverless.com/framework/docs/deprecations/#NEW_VARIABLES_RESOLVER
+
+Resolution of lambda version hashes was improved with better algorithm, which will be used in next major release.
+Switch to it now by setting "provider.lambdaHashingVersion" to "20201221".
+While it is highly encouraged to upgrade to new algorithm, you can still use the old approach by setting "provider.lambdaHashingVersion" to "20200924".
+More Info: https://www.serverless.com/framework/docs/deprecations/#LAMBDA_HASHING_VERSION_V2
